@@ -1,15 +1,11 @@
 Database Design & Programming with SQL
-
+This is a link to our draw.io
+https://drive.google.com/file/d/1_a_nB2T0EjN8sJQJXmfosK1CmBMMZJgm/view?usp=sharing
 
 Overview
 
 In this project, you'll step into the role of a database administrator tasked with building a  MySQL database to store and manage data for a BookStore. By applying your skills in database design, table creation, data loading, and user management, you'll develop an organized system for this important real-world system. 
 This hands-on project provides valuable experience in efficiently structuring databases to handle large, complex data.
-
-
-
-
-
 
 Tools and Technologies
 1.	MySQL - For building and managing the database
