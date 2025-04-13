@@ -277,3 +277,5 @@ GRANT ALL PRIVILEGES ON data_trio_bookstore_db.* TO 'bookstore_admin'@'localhost
 
 -- Apply changes
 FLUSH PRIVILEGES;
+
+--END OF SQL DOC
