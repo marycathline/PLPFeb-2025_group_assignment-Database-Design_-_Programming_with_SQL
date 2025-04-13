@@ -130,3 +130,150 @@ CREATE TABLE order_history (
     FOREIGN KEY (order_id) REFERENCES cust_order(order_id),
     FOREIGN KEY (status_id) REFERENCES order_status(status_id)
 );
+
+-- Languages
+INSERT INTO book_language (language_name)
+VALUES 
+  ('English'), 
+  ('Swahili'), 
+  ('French'),
+  ('Arabic'),
+  ('Portuguese');
+
+-- Publishers
+INSERT INTO publisher (name, country)
+VALUES 
+  ('EA Books Ltd', 'Kenya'), 
+  ('PanAfrica Publishers', 'Uganda'),
+  ('Safari Press', 'Tanzania'),
+  ('Lakeview Media', 'Kenya'),
+  ('Rwenzori House', 'Uganda');
+
+-- Authors
+INSERT INTO author (first_name, last_name)
+VALUES 
+  ('Ngugi', 'wa Thiong\'o'), 
+  ('Chimamanda', 'Adichie'), 
+  ('Yvonne', 'Owuor'), 
+  ('Ben', 'Okri'), 
+  ('Meja', 'Mwangi');
+
+-- Countries
+INSERT INTO country (country_name)
+VALUES 
+  ('Kenya'), 
+  ('Uganda'), 
+  ('Tanzania'),
+  ('Rwanda'),
+  ('South Sudan');
+
+-- Address Status
+INSERT INTO address_status (status_name)
+VALUES 
+  ('current'), 
+  ('old'),
+  ('temporary'),
+  ('inactive'),
+  ('secondary');
+
+-- Shipping Methods
+INSERT INTO shipping_method (method_name)
+VALUES 
+  ('Pickup - Nairobi'), 
+  ('Courier - East Africa'), 
+  ('Global Shipping'),
+  ('Boda Delivery - Local'),
+  ('Postal Mail');
+
+-- Order Statuses
+INSERT INTO order_status (status_name)
+VALUES 
+  ('pending'), 
+  ('shipped'), 
+  ('delivered'), 
+  ('cancelled'),
+  ('on hold');
+
+-- Addresses
+INSERT INTO address (street, city, postal_code, country_id)
+VALUES 
+  ('Kenyatta Ave', 'Nairobi', '00100', 1),
+  ('Moi Ave', 'Mombasa', '80100', 1),
+  ('Jinja Rd', 'Kampala', '25600', 2),
+  ('Uhuru St', 'Arusha', '23100', 3),
+  ('Remera Blvd', 'Kigali', '00250', 4);
+
+-- Customers
+INSERT INTO customer (first_name, last_name, email)
+VALUES 
+  ('Achieng', 'Otieno', 'achieng@example.com'),
+  ('John', 'Kamau', 'johnk@example.com'),
+  ('Fatuma', 'Ali', 'fatuma@example.com'),
+  ('Brian', 'Wanyama', 'brianw@example.com'),
+  ('Grace', 'Mutiso', 'gracem@example.com');
+
+-- Customer Addresses
+INSERT INTO customer_address (customer_id, address_id, status_id)
+VALUES 
+  (1, 1, 1), 
+  (2, 2, 1),
+  (3, 3, 1),
+  (4, 4, 2),
+  (5, 5, 3);
+
+-- Books
+INSERT INTO book (title, isbn, publication_year, language_id, publisher_id, price)
+VALUES 
+  ('The River Between', '9780141187034', 2004, 1, 1, 750.00),
+  ('Half of a Yellow Sun', '9780007200283', 2006, 1, 2, 1200.00),
+  ('Dust', '9780345804122', 2013, 1, 3, 950.00),
+  ('The Famished Road', '9780385425131', 1991, 1, 4, 1100.00),
+  ('Going Down River Road', '9789966467514', 1976, 2, 5, 670.00);
+
+-- Book Authors
+INSERT INTO book_author (book_id, author_id)
+VALUES 
+  (1, 1), 
+  (2, 2), 
+  (3, 3),
+  (4, 4),
+  (5, 5);
+
+-- Orders
+INSERT INTO cust_order (customer_id, order_date, shipping_id, status_id)
+VALUES 
+  (1, '2025-04-01', 2, 1),
+  (2, '2025-04-10', 1, 2),
+  (3, '2025-04-05', 3, 3),
+  (4, '2025-04-08', 4, 4),
+  (5, '2025-04-09', 5, 1);
+
+-- Order Lines
+INSERT INTO order_line (order_id, book_id, quantity, price_each)
+VALUES 
+  (1, 1, 2, 750.00),
+  (2, 2, 1, 1200.00),
+  (3, 3, 1, 950.00),
+  (4, 4, 1, 1100.00),
+  (5, 5, 3, 670.00);
+
+-- Order History
+INSERT INTO order_history (order_id, status_id, updated_at)
+VALUES 
+  (1, 1, NOW()),
+  (2, 2, NOW()),
+  (3, 3, NOW()),
+  (4, 4, NOW()),
+  (5, 1, NOW());
+
+
+-- Create a read-only user
+CREATE USER 'readonly_user'@'localhost' IDENTIFIED BY '123';
+GRANT SELECT ON data_trio_bookstore_db.* TO 'readonly_user'@'localhost';
+
+-- Create an admin user with full privileges
+CREATE USER 'bookstore_admin'@'localhost' IDENTIFIED BY '123';
+GRANT ALL PRIVILEGES ON data_trio_bookstore_db.* TO 'bookstore_admin'@'localhost';
+
+-- Apply changes
+FLUSH PRIVILEGES;
